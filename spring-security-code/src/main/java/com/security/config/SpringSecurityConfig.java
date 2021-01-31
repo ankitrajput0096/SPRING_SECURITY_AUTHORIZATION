@@ -66,16 +66,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint(new AuthenticationEntryPoint() {
                     @Override
-                    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
+                    public void commence(HttpServletRequest httpServletRequest,
+                                         HttpServletResponse httpServletResponse,
+                                         AuthenticationException e) throws IOException {
                         // 401
-                        httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed, Yaar Ankit");
+                        httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                                "Authentication Failed, Yaar Ankit");
                     }
                 })
                 .accessDeniedHandler(new AccessDeniedHandler() {
                     @Override
-                    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
+                    public void handle(HttpServletRequest httpServletRequest,
+                                       HttpServletResponse httpServletResponse,
+                                       AccessDeniedException e) throws IOException {
                         // 403
-                        httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN, "Authorization Failed, Yaar Ankit : " + e.getMessage());
+                        httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN,
+                                "Authorization Failed, Yaar Ankit : " + e.getMessage());
                     }
                 });
     }
