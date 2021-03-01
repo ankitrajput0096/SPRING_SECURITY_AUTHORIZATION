@@ -58,7 +58,7 @@ public class SpringBootJpaApplication implements ApplicationRunner {
 							.userName("Ankit022")
 							.email("ankitrajput0096@gmail.com")
 							.password("Rajput")
-							.role(UserRole.ADMIN)
+							.role(UserRole.USER)
 							.build()));
 	}
 }

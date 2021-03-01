@@ -1,6 +1,7 @@
 package com.example.Spring_Boot_JPA.service;
 
 import com.example.Spring_Boot_JPA.bo.AppUserBo;
+import com.example.Spring_Boot_JPA.entity.AppUserEntity;
 import com.example.Spring_Boot_JPA.mappers.impl.AppUserBoEntityMapper;
 import com.example.Spring_Boot_JPA.repository.AppUserRepository;
 import com.example.Spring_Boot_JPA.serviceInterface.DataManagerAppUser;
@@ -58,18 +59,15 @@ public class PersistentDataManagerAppUser implements DataManagerAppUser {
     @Override
     @Transactional
     public void updateAppUser(final AppUserBo appUserBo, final Long id) {
-        AppUserBo entityBo = this.appUserBoEntityMapper.toBo(
-                this.appUserRepository.findById(id).orElse(null));
-        if(Objects.isNull(entityBo)) {
+        AppUserEntity entity = this.appUserRepository.findById(id).orElse(null);
+        if(Objects.isNull(entity)) {
             log.info("The app users with id : {} is not present in DB.", id);
             return;
         }
-        entityBo.setUsername(appUserBo.getUsername());
-        entityBo.setEmail(appUserBo.getEmail());
-        entityBo.setRole(appUserBo.getRole());
-        entityBo.setPassword(appUserBo.getPassword());
-        this.appUserRepository.save(
-                this.appUserBoEntityMapper.toEntity(entityBo));
+        entity.setUserName(appUserBo.getUsername());
+        entity.setRole(appUserBo.getRole());
+        entity.setPassword(appUserBo.getPassword());
+        this.appUserRepository.save(entity);
     }
 
     @Override

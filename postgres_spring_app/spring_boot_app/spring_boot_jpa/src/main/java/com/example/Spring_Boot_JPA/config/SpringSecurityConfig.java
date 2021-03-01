@@ -43,7 +43,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(bCryptPasswordEncoder);
     }
 
-    // Secure the endpoins with HTTP Basic authentication
+    // Secure the endpoints with HTTP Basic authentication
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -52,10 +52,20 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/springBootJpa/books/**", "/springBootJpa/books").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers(HttpMethod.GET, "/springBootJpa/books/**", "/springBootJpa/books")
+                .hasAnyAuthority("ADMIN", "USER")
                 .antMatchers(HttpMethod.POST, "/springBootJpa/books/**").hasAuthority("USER")
-                .antMatchers(HttpMethod.PUT, "/springBootJpa/books/**").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.DELETE, "/springBootJpa/books/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/springBootJpa/books/**")
+                .hasAnyAuthority("ADMIN", "USER")
+                .antMatchers(HttpMethod.DELETE, "/springBootJpa/books/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET , "/springBootJpa/AppUsers/**", "/springBootJpa/AppUsers")
+                .hasAuthority( "USER")
+                .antMatchers(HttpMethod.POST , "/springBootJpa/AppUsers")
+                .hasAuthority( "ADMIN")
+                .antMatchers(HttpMethod.PUT , "/springBootJpa/AppUsers/**")
+                .hasAuthority( "ADMIN")
+                .antMatchers(HttpMethod.DELETE , "/springBootJpa/AppUsers/**")
+                .hasAuthority( "ADMIN")
                 .antMatchers("/springBootJpa/topics", "/springBootJpa/topics/**",
                         "/springBootJpa/", "/springBootJpa/transaction/**").permitAll()
                 .and()
