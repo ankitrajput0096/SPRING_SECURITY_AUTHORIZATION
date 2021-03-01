@@ -56,8 +56,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/springBootJpa/books/**").hasAuthority("USER")
                 .antMatchers(HttpMethod.PUT, "/springBootJpa/books/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.DELETE, "/springBootJpa/books/**").hasRole("ADMIN")
-                .antMatchers("/springBootJpa/topics", "/springBootJpa/topics/**").permitAll()
-                .antMatchers("/springBootJpa/", "/springBootJpa/transaction/**").permitAll()
+                .antMatchers("/springBootJpa/topics", "/springBootJpa/topics/**",
+                        "/springBootJpa/", "/springBootJpa/transaction/**").permitAll()
                 .and()
                 .csrf().disable()
                 .formLogin().disable()

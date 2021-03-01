@@ -23,8 +23,12 @@ public class SecurityUserDetailsService implements UserDetailsService {
             throws UsernameNotFoundException {
         log.debug("Authenticating user with email={}",
                 email.replaceFirst("@.*", "@***"));
+
+        // Retrieving user details from DB.
         AppUserBo appUserBo = this.persistentDataManagerAppUser
                 .getAppUserByEmailId(email);
+        // This can also be an ApI call to other micro-service to
+        // fetch user details.
 
         return new User(appUserBo.getUsername(), appUserBo.getPassword(),
                 AuthorityUtils.createAuthorityList(appUserBo.getRole().toString()));
