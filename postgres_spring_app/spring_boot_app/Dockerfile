@@ -1,9 +1,9 @@
 # Base Image ubuntu
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 # Installing dependencies
 RUN apt-get update
-RUN apt-get install -y openjdk-8-jdk maven 
+RUN apt-get install -y openjdk-11-jdk maven 
 
 # coping the required application files
 COPY . /spring_boot_app
